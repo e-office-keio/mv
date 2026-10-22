@@ -233,15 +233,15 @@ const study = lab.util.fromObject({
             "parameters": {},
             "messageHandlers": {
               "run": function anonymous(
-) {
-const video = document.querySelector('video');
+              ) {
+                const video = document.querySelector('video');
 
-if (video) {
-  video.addEventListener('ended', () => {
-    this.end();
-  });
-}
-}
+                if (video) {
+                  video.addEventListener('ended', () => {
+                    this.end();
+                  });
+                }
+              }
             },
             "title": "Screen",
             "content": "\u003Cvideo\r\n\r\n  width=\"100%\"\r\n\r\n  style=\"max-width:800px; height:auto; aspect-ratio:16\u002F9; display:block; margin:auto;\"\r\n\r\n  controls\u003E\r\n\r\n  \u003Csource src=\"${ parameters.videoURL }\" type=\"video\u002Fmp4\"\u003E\r\n\r\n\u003C\u002Fvideo\u003E"
@@ -688,7 +688,7 @@ if (video) {
             "",
             "完全に気づいていた"
           ],
-          "label": "次の質問にお答えください。",
+          "label": "Q1. 次の質問にお答えください。",
           "name": "debriefing"
         },
         {
