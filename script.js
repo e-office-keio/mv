@@ -745,19 +745,47 @@ const study = lab.util.fromObject({
       "items": [
         {
           "type": "text",
-          "content": "実験にご協力いただき、誠にありがとうございました。"
+          "title": "\u003Cspan style = \"color:tomato\"\u003Eこれで本実験・調査は終了です！\u003C\u002Fspan\u003E",
+          "content": "\u003Cspan style = \"color:tomato\"\u003Eご協力くださり，誠にありがとうございました。ウィンドウを閉じて実験を終了してください。\u003C\u002Fspan\u003E"
         }
       ],
       "scrollTop": true,
-      "submitButtonText": "終わる →",
-      "submitButtonPosition": "right",
+      "submitButtonText": "Continue →",
+      "submitButtonPosition": "hidden",
       "files": {},
       "responses": {
         "": ""
       },
       "parameters": {},
-      "messageHandlers": {},
-      "title": "bye"
+      "messageHandlers": {
+        "before:prepare": function anonymous(
+        ) {
+          //check Tardy
+          //ファイル名をランダムIDにする
+          const participantID = this.random.uuid4()
+
+          //csvファイルで保存する場合
+          const filename = participantID + "_data.csv"
+          const data = study.internals.controller.datastore.exportCsv();
+
+          fetch("https://pipe.jspsych.org/api/data/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "*/*",
+            },
+            body: JSON.stringify({
+              experimentID: "CR8NXR0hjNiy",
+              filename: filename,
+              data: data,
+            }),
+          });
+
+        }
+      },
+      "title": "final thanks",
+      "timeout": "1000",
+      "tardy": true
     }
   ]
 })
